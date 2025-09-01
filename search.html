@@ -5,24 +5,325 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>استعلام عن بيانات معلمي مدرسة بيش جرن</title>
     <link rel="icon" href="https://i.ibb.co/L6v3cZ1/school-icon.jpg" type="image/jpeg">
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>:root{--primary-color:#005f73;--secondary-color:#0a9396;--background-color:#f0f2f5;--font-family:'Cairo',sans-serif}body{font-family:var(--font-family );background-color:var(--background-color);margin:0;padding:20px}.container{width:100%;max-width:1200px;margin:20px auto;background:#fff;padding:30px 40px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.1)}.header{text-align:center;margin-bottom:30px;border-bottom:2px solid #eee;padding-bottom:20px}.header h1{font-size:32px;font-weight:700;color:var(--primary-color);margin:0}.header p{font-size:18px;color:#555}.controls{display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;margin-bottom:30px}.search-box{display:flex;flex-grow:1;min-width:300px}#searchInput{width:100%;padding:12px 15px;font-size:16px;border:2px solid #ccc;border-radius:0 8px 8px 0;border-left:none;font-family:var(--font-family)}#searchButton{padding:0 25px;font-size:16px;font-weight:600;border:none;background-color:var(--primary-color);color:#fff;cursor:pointer;border-radius:8px 0 0 8px;transition:background-color .3s}#searchButton:hover{background-color:var(--secondary-color)}.filter-buttons{display:flex;gap:10px;flex-wrap:wrap}.filter-btn{padding:10px 20px;font-size:15px;font-weight:600;border:2px solid var(--secondary-color);background-color:#fff;color:var(--secondary-color);cursor:pointer;border-radius:8px;transition:all .3s}.filter-btn:hover,.filter-btn.active{background-color:var(--secondary-color);color:#fff}.table-container{max-height:65vh;overflow:auto;border:1px solid #ddd;border-radius:8px}#data-table{width:100%;border-collapse:collapse;font-size:15px}#data-table th,#data-table td{padding:14px 12px;border:1px solid #dee2e6;text-align:right;white-space:nowrap}#data-table thead{position:sticky;top:-1px}#data-table th{background-color:var(--primary-color);color:#fff;font-weight:600}#data-table tbody tr:nth-child(even){background-color:#f8f9fa}#data-table tbody tr:hover{background-color:#e9ecef}#status-message{text-align:center;padding:50px;font-size:22px;color:#6c757d;font-weight:600}</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #005f73;
+            --secondary-color: #0a9396;
+            --background-color: #f0f2f5;
+            --font-family: 'Cairo', sans-serif;
+        }
+        body {
+            font-family: var(--font-family);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 95%; /* تم توسيع العرض لاستيعاب الجدول */
+            margin: 20px auto;
+            background: #fff;
+            padding: 30px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 0;
+        }
+        .header p {
+            font-size: 18px;
+            color: #555;
+        }
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        .search-box {
+            display: flex;
+            flex-grow: 1;
+            min-width: 300px;
+        }
+        #searchInput {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 0 8px 8px 0;
+            border-left: none;
+            font-family: var(--font-family);
+        }
+        #searchButton {
+            padding: 0 25px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            background-color: var(--primary-color);
+            color: #fff;
+            cursor: pointer;
+            border-radius: 8px 0 0 8px;
+            transition: background-color .3s;
+        }
+        #searchButton:hover {
+            background-color: var(--secondary-color);
+        }
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 10px 20px;
+            font-size: 15px;
+            font-weight: 600;
+            border: 2px solid var(--secondary-color);
+            background-color: #fff;
+            color: var(--secondary-color);
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all .3s;
+        }
+        .filter-btn:hover,
+        .filter-btn.active {
+            background-color: var(--secondary-color);
+            color: #fff;
+        }
+        .table-container {
+            max-height: 70vh; /* زيادة الارتفاع */
+            overflow: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        #data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+        #data-table th,
+        #data-table td {
+            padding: 14px 12px;
+            border: 1px solid #dee2e6;
+            text-align: right;
+            white-space: nowrap; /* لمنع التفاف النص داخل الخلايا */
+        }
+        #data-table thead {
+            position: sticky;
+            top: -1px;
+        }
+        #data-table th {
+            background-color: var(--primary-color);
+            color: #fff;
+            font-weight: 600;
+        }
+        #data-table tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        #data-table tbody tr:hover {
+            background-color: #e9ecef;
+        }
+        #status-message {
+            text-align: center;
+            padding: 50px;
+            font-size: 22px;
+            color: #6c757d;
+            font-weight: 600;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
-    <div class="header"><h1>استعلام بيانات المعلمين</h1><p>مدرسة بيش جرن</p></div>
+    <div class="header">
+        <h1>استعلام بيانات المعلمين</h1>
+        <p>مدرسة بيش جرن</p>
+    </div>
     <div class="controls">
-        <div class="search-box"><button id="searchButton">بحث</button><input type="text" id="searchInput" placeholder="أدخل رقم الهوية للبحث عن معلم..."></div>
-        <div class="filter-buttons"><button class="filter-btn" data-filter="all">عرض الكل</button><button class="filter-btn" data-filter="permanent">أصيل</button><button class="filter-btn" data-filter="contract">وكيل</button><button class="filter-btn" data-filter="university">جامعي</button></div>
+        <div class="search-box">
+            <button id="searchButton">بحث</button>
+            <input type="text" id="searchInput" placeholder="أدخل رقم الهوية للبحث عن معلم...">
+        </div>
+        <div class="filter-buttons">
+            <button class="filter-btn" data-filter="all">عرض الكل</button>
+            <button class="filter-btn" data-filter="permanent">أصيل</button>
+            <button class="filter-btn" data-filter="contract">وكيل</button>
+            <button class="filter-btn" data-filter="university">جامعي</button>
+        </div>
     </div>
     <div class="table-container">
         <p id="status-message">أدخل رقم الهوية أو انقر على "عرض الكل" لبدء البحث.</p>
         <table id="data-table" style="display:none">
-            <thead><tr><th>الاسم الثلاثي</th><th>رقم الهوية</th><th>المسمى الوظيفي</th><th>أصيل/وكيل</th><th>التحصيل العلمي</th><th>الاختصاص</th><th>رقم الهاتف</th></tr></thead>
+            <thead>
+                <tr>
+                    <th>اسم المدرسة</th>
+                    <th>الاسم الثلاثي</th>
+                    <th>اسم الأم</th>
+                    <th>مكان الولادة</th>
+                    <th>تاريخ التولد</th>
+                    <th>هوية سابقة</th>
+                    <th>هوية المجلس</th>
+                    <th>رقم الهوية</th>
+                    <th>الأمانة</th>
+                    <th>القيد</th>
+                    <th>الوضع الاجتماعي</th>
+                    <th>الجنس</th>
+                    <th>الفئة</th>
+                    <th>المسمى الوظيفي</th>
+                    <th>أصيل/وكيل</th>
+                    <th>التحصيل العلمي</th>
+                    <th>الاختصاص</th>
+                    <th>تاريخ الحصول عليها</th>
+                    <th>مصدر الشهادة</th>
+                    <th>تاريخ المباشرة</th>
+                    <th>رقم الهاتف</th>
+                    <th>الرقم الذاتي</th>
+                </tr>
+            </thead>
             <tbody id="table-body"></tbody>
         </table>
     </div>
 </div>
-<script>document.addEventListener("DOMContentLoaded",function(){const e="https://script.google.com/macros/s/AKfycbz_BQ6WqMjzc_ORTmFITWYGPjXhoV0Z76VZe57Leg10vsLbaoIhT6CgJA7X9W8-Or6sbA/exec",t=document.getElementById("searchInput"),n=document.getElementById("searchButton"),o=document.querySelectorAll(".filter-btn"),a=document.getElementById("data-table"),d=document.getElementById("table-body"),i=document.getElementById("status-message");let s=[];function l(e){d.innerHTML="",0===e.length?(i.textContent="لا توجد نتائج تطابق بحثك.",i.style.display="block",a.style.display="none"):(i.style.display="none",a.style.display="table",e.forEach(e=>{const t=document.createElement("tr"),n=e[2]||"",o=e[7]||"",a=e[14]||"",i=e[15]||"",s=e[16]||"",l=e[17]||"",c=e[21]||"";t.innerHTML=`\n                    <td>${n}</td><td>${o}</td><td>${a}</td>\n                    <td>${i}</td><td>${s}</td><td>${l}</td><td>${c}</td>\n                `,d.appendChild(t)}))}async function c(){if(s.length>0)return s;i.textContent="جاري تحميل البيانات من الخادم...",i.style.display="block",a.style.display="none";try{const t=await fetch(e),n=await t.text(),o=JSON.parse(n);if(o.error)throw new Error(o.error);return s=o.reverse(),s}catch(e){return console.error("Error fetching data:",e),i.textContent="فشل في تحميل البيانات. تحقق من الرابط أو اتصالك بالإنترنت.",[]}}n.addEventListener("click",async()=>{const e=t.value.trim();if(!e)return void alert("يرجى إدخال رقم الهوية للبحث.");const n=await c(),a=n.filter(t=>t[7]===e);l(a),o.forEach(e=>e.classList.remove("active"))}),t.addEventListener("keyup",e=>{("Enter"===e.key||13===e.keyCode)&&n.click()}),o.forEach(e=>{e.addEventListener("click",async()=>{const t=e.dataset.filter;o.forEach(e=>e.classList.remove("active")),e.classList.add("active");const n=await c();let a=[];"all"===t?a=n:"permanent"===t?a=n.filter(e=>"أصيل"===e[15]):"contract"===t?a=n.filter(e=>"وكيل"===e[15]):"university"===t&&(a=n.filter(e=>"إجازة"===e[16])),l(a)})})});</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz_BQ6WqMjzc_ORTmFITWYGPjXhoV0Z76VZe57Leg10vsLbaoIhT6CgJA7X9W8-Or6sbA/exec";
+    const searchInput = document.getElementById("searchInput");
+    const searchButton = document.getElementById("searchButton");
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const dataTable = document.getElementById("data-table");
+    const tableBody = document.getElementById("table-body");
+    const statusMessage = document.getElementById("status-message");
+
+    let allTeachersData = []; // لتخزين البيانات محليًا بعد أول جلب
+
+    // --- دالة لعرض البيانات في الجدول ---
+    function renderTable(data) {
+        tableBody.innerHTML = ""; // مسح الجدول قبل إضافة البيانات الجديدة
+
+        if (data.length === 0) {
+            statusMessage.textContent = "لا توجد نتائج تطابق بحثك.";
+            statusMessage.style.display = "block";
+            dataTable.style.display = "none";
+        } else {
+            statusMessage.style.display = "none";
+            dataTable.style.display = "table";
+            data.forEach(teacher => {
+                const row = document.createElement("tr");
+                // إنشاء خلايا لجميع الأعمدة الـ 22
+                // يتم استخدام || '' لضمان عرض قيمة فارغة بدلاً من 'undefined' إذا كانت الخلية فارغة
+                row.innerHTML = `
+                    <td>${teacher[1] || ''}</td>
+                    <td>${teacher[2] || ''}</td>
+                    <td>${teacher[3] || ''}</td>
+                    <td>${teacher[4] || ''}</td>
+                    <td>${teacher[5] || ''}</td>
+                    <td>${teacher[6] || ''}</td>
+                    <td>${teacher[7] || ''}</td>
+                    <td>${teacher[8] || ''}</td>
+                    <td>${teacher[9] || ''}</td>
+                    <td>${teacher[10] || ''}</td>
+                    <td>${teacher[11] || ''}</td>
+                    <td>${teacher[12] || ''}</td>
+                    <td>${teacher[13] || ''}</td>
+                    <td>${teacher[14] || ''}</td>
+                    <td>${teacher[15] || ''}</td>
+                    <td>${teacher[16] || ''}</td>
+                    <td>${teacher[17] || ''}</td>
+                    <td>${teacher[18] || ''}</td>
+                    <td>${teacher[19] || ''}</td>
+                    <td>${teacher[20] || ''}</td>
+                    <td>${teacher[21] || ''}</td>
+                    <td>${teacher[22] || ''}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+    }
+
+    // --- دالة لجلب البيانات من الخادم مرة واحدة فقط ---
+    async function fetchDataOnce() {
+        if (allTeachersData.length > 0) {
+            return allTeachersData; // إذا تم جلب البيانات من قبل، قم بإرجاعها مباشرة
+        }
+        statusMessage.textContent = "جاري تحميل البيانات من الخادم...";
+        statusMessage.style.display = "block";
+        dataTable.style.display = "none";
+        try {
+            const response = await fetch(SCRIPT_URL);
+            const textData = await response.text();
+            const jsonData = JSON.parse(textData);
+            if (jsonData.error) {
+                throw new Error(jsonData.error);
+            }
+            allTeachersData = jsonData.reverse(); // عكس الترتيب لعرض الأحدث أولاً
+            return allTeachersData;
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            statusMessage.textContent = "فشل في تحميل البيانات. تحقق من الرابط أو اتصالك بالإنترنت.";
+            return [];
+        }
+    }
+
+    // --- حدث النقر على زر البحث ---
+    searchButton.addEventListener("click", async () => {
+        const searchTerm = searchInput.value.trim();
+        if (!searchTerm) {
+            alert("يرجى إدخال رقم الهوية للبحث.");
+            return;
+        }
+        const data = await fetchDataOnce();
+        // البحث في العمود الثامن (فهرس 7) الذي يحتوي على رقم الهوية
+        const filteredData = data.filter(teacher => teacher[8] === searchTerm);
+        renderTable(filteredData);
+        filterButtons.forEach(btn => btn.classList.remove("active"));
+    });
+
+    // --- حدث الضغط على Enter في حقل البحث ---
+    searchInput.addEventListener("keyup", (event) => {
+        if (event.key === "Enter" || event.keyCode === 13) {
+            searchButton.click();
+        }
+    });
+
+    // --- أحداث النقر على أزرار الفلترة ---
+    filterButtons.forEach(button => {
+        button.addEventListener("click", async () => {
+            const filterType = button.dataset.filter;
+            filterButtons.forEach(btn => btn.classList.remove("active"));
+            button.classList.add("active");
+
+            const data = await fetchDataOnce();
+            let filteredData = [];
+
+            if (filterType === "all") {
+                filteredData = data;
+            } else if (filterType === "permanent") {
+                // الفلترة حسب "أصيل" في العمود 16 (فهرس 15)
+                filteredData = data.filter(teacher => teacher[15] === "أصيل");
+            } else if (filterType === "contract") {
+                // الفلترة حسب "وكيل" في العمود 16 (فهرس 15)
+                filteredData = data.filter(teacher => teacher[15] === "وكيل");
+            } else if (filterType === "university") {
+                // الفلترة حسب "إجازة" في العمود 17 (فهرس 16)
+                filteredData = data.filter(teacher => teacher[16] === "إجازة");
+            }
+            renderTable(filteredData);
+        });
+    });
+});
+</script>
 </body>
 </html>
