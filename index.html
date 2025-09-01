@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة معلمي مدرسة بيش جرن</title>
+    <link rel="icon" href="https://i.ibb.co/L6v3cZ1/school-icon.jpg" type="image/jpeg">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>:root{--primary-color:#005f73;--secondary-color:#0a9396;--accent-color:#94d2bd;--submit-color:#2a9d8f;--background-color:#f0f2f5;--font-family:'Cairo',sans-serif}body{font-family:var(--font-family );background-color:var(--background-color);margin:0;padding:20px;display:flex;justify-content:center;align-items:center;min-height:100vh}.container{width:100%;max-width:950px;background:#fff;padding:40px 50px;border-radius:25px;box-shadow:0 15px 40px rgba(0,0,0,.1);border:10px solid transparent;background-clip:padding-box;border-image:linear-gradient(135deg,var(--secondary-color),var(--accent-color)) 1;position:relative}.school-icon{position:absolute;top:25px;left:35px;width:80px;height:80px;border-radius:50%;border:4px solid var(--primary-color);box-shadow:0 4px 10px rgba(0,0,0,.2);object-fit:cover}.school-header{text-align:center;margin-bottom:20px}.school-header h2{font-size:32px;font-weight:700;color:var(--primary-color);margin:0}.tabs{display:flex;border-bottom:2px solid #dee2e6;margin-bottom:25px}.tab-button{padding:12px 25px;border:none;background-color:transparent;cursor:pointer;font-size:18px;font-weight:600;color:#6c757d;position:relative;transition:color .3s;font-family:var(--font-family)}.tab-button.active{color:var(--primary-color)}.tab-button.active::after{content:'';position:absolute;bottom:-2px;right:0;width:100%;height:3px;background-color:var(--primary-color);border-radius:2px}#form-section{min-height:450px}#teacherForm{position:relative;min-height:220px}.progress-bar{margin:30px 0}.progress{height:12px;background-color:#e9ecef;border-radius:6px;overflow:hidden}.progress-inner{height:100%;width:0;background:linear-gradient(90deg,var(--accent-color),var(--secondary-color));border-radius:6px;transition:width .5s cubic-bezier(.4,0,.2,1)}#step-counter{text-align:center;margin-bottom:10px;font-weight:600;color:var(--primary-color);font-size:16px}.form-step{width:100%;position:absolute;opacity:0;visibility:hidden;transform:translateX(50px);transition:opacity .4s ease-out,transform .4s ease-out,visibility .4s}.form-step.active{opacity:1;visibility:visible;transform:translateX(0);position:relative}.form-step.inactive{transform:translateX(-50px)}.form-group{text-align:center}label{display:block;margin-bottom:18px;color:#111;font-size:26px;font-weight:600}input,select{padding:18px 25px;border:2px solid #ced4da;border-radius:12px;width:100%;box-sizing:border-box;font-size:18px;font-family:var(--font-family);text-align:center;transition:border-color .3s,box-shadow .3s;box-shadow:inset 0 2px 4px rgba(0,0,0,.06)}input:focus,select:focus{border-color:var(--secondary-color);box-shadow:0 0 12px rgba(10,147,150,.25),inset 0 2px 4px rgba(0,0,0,.06);outline:none}.navigation-buttons{display:flex;justify-content:space-between;margin-top:40px}.nav-btn{padding:15px 40px;border:none;border-radius:12px;cursor:pointer;font-size:18px;font-family:var(--font-family);font-weight:700;transition:all .3s ease;box-shadow:0 4px 15px rgba(0,0,0,.1)}.nav-btn:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(0,0,0,.15)}.nav-btn:active{transform:translateY(-1px)}.prev-btn{background-color:#6c757d;color:#fff}.next-btn{background-color:var(--primary-color);color:#fff}.submit-btn{background-color:var(--submit-color);color:#fff;width:100%}.submit-btn:disabled{background-color:#aaa;cursor:not-allowed;transform:none;box-shadow:0 4px 15px rgba(0,0,0,.1)}#message{text-align:center;margin-top:20px;font-weight:600;padding:15px;border-radius:10px;display:none;font-size:18px}.message-success{display:block;background-color:#d1e7dd;color:#0f5132}.message-error{display:block;background-color:#f8d7da;color:#842029}.message-sending{display:block;background-color:#fff3cd;color:#664d03}</style>
+</head>
+<body>
+<div class="container">
+    <img src="https://i.ibb.co/L6v3cZ1/school-icon.jpg" alt="شعار مدرسة بيش جرن" class="school-icon">
+    <div class="school-header"><h2>بوابة معلمي بيش جرن</h2></div>
+    <div class="tabs">
+        <button class="tab-button active">نموذج التسجيل</button>
+        <button class="tab-button" onclick="window.location.href='search.html'">بحث واستعلام</button>
+    </div>
+    <div id="form-section" class="tab-content active">
+        <div class="progress-bar"><div id="step-counter"></div><div class="progress"><div class="progress-inner" id="progress-inner"></div></div></div>
+        <form id="teacherForm" novalidate>
+            <div class="form-step active"><div class="form-group"><label for="schoolName">اسم المدرسة</label><input type="text" id="schoolName" name="schoolName" required></div></div>
+            <div class="form-step"><div class="form-group"><label for="fullName">الاسم الثلاثي</label><input type="text" id="fullName" name="fullName" required></div></div>
+            <div class="form-step"><div class="form-group"><label for="motherName">اسم الأم</label><input type="text" id="motherName" name="motherName" required></div></div>
+            <div class="form-step"><div class="form-group"><label for="birthPlace">مكان الولادة</label><input type="text" id="birthPlace" name="birthPlace" required></div></div>
+            <div class="form-step"><div class="form-group"><label for="birthDate">تاريخ التولد / كاملاً</label><input type="date" id="birthDate" name="birthDate" required></div></div>
+            <div class="form-step"><div class="form-group"><label for="previousIdNumber">الرقم الشخصي للهوية السابقة</label><input type="text" id="previousIdNumber" name="previousIdNumber"></div></div>
+            <div class="form-step"><div class="form-group"><label for="councilIdNumber">الرقم الشخصي هوية المجلس</label><input type="text" id="councilIdNumber" name="councilIdNumber"></div></div>
+            <div class="form-step"><div class="form-group"><label for="idNumber">رقم الهوية</label><input type="text" id="idNumber" name="idNumber"></div></div>
+            <div class="form-step"><div class="form-group"><label for="registryTrust">الأمانة</label><input type="text" id="registryTrust" name="registryTrust"></div></div>
+            <div class="form-step"><div class="form-group"><label for="registration">القيد</label><input type="text" id="registration" name="registration"></div></div>
+            <div class="form-step"><div class="form-group"><label for="maritalStatus">الوضع الاجتماعي</label><select id="maritalStatus" name="maritalStatus"><option value="أعزب/عزباء">أعزب/عزباء</option><option value="متزوج/متزوجة">متزوج/متزوجة</option><option value="مطلق/مطلقة">مطلق/مطلقة</option><option value="أرمل/أرملة">أرمل/أرملة</option></select></div></div>
+            <div class="form-step"><div class="form-group"><label for="gender">الجنس</label><select id="gender" name="gender"><option value="ذكر">ذكر</option><option value="أنثى">أنثى</option></select></div></div>
+            <div class="form-step"><div class="form-group"><label for="category">الفئة</label><input type="text" id="category" name="category"></div></div>
+            <div class="form-step"><div class="form-group"><label for="jobTitle">المسمى الوظيفي</label><input type="text" id="jobTitle" name="jobTitle"></div></div>
+            <div class="form-step"><div class="form-group"><label for="employmentType">أصيل / وكيل</label><select id="employmentType" name="employmentType"><option value="أصيل">أصيل</option><option value="وكيل">وكيل</option></select></div></div>
+            <div class="form-step"><div class="form-group"><label for="educationLevel">التحصيل العلمي</label><select id="educationLevel" name="educationLevel"><option value="ثانوية">ثانوية</option><option value="معهد">معهد</option><option value="إجازة">إجازة</option></select></div></div>
+            <div class="form-step"><div class="form-group"><label for="specialization">الاختصاص</label><input type="text" id="specialization" name="specialization"></div></div>
+            <div class="form-step"><div class="form-group"><label for="graduationDate">تاريخ الحصول عليها</label><input type="date" id="graduationDate" name="graduationDate"></div></div>
+            <div class="form-step"><div class="form-group"><label for="certificateIssuer">مصدر الشهادة</label><input type="text" id="certificateIssuer" name="certificateIssuer"></div></div>
+            <div class="form-step"><div class="form-group"><label for="firstDayOfWork">تاريخ المباشرة الأولى</label><input type="date" id="firstDayOfWork" name="firstDayOfWork"></div></div>
+            <div class="form-step"><div class="form-group"><label for="phoneNumber">رقم الهاتف مع النداء</label><input type="tel" id="phoneNumber" name="phoneNumber"></div></div>
+            <div class="form-step"><div class="form-group"><label for="selfNumber">الرقم الذاتي / للمثبتين قبل الثورة</label><input type="text" id="selfNumber" name="selfNumber"></div></div>
+            <div class="navigation-buttons"><button type="button" class="nav-btn prev-btn" id="prevBtn">السابق</button><button type="button" class="nav-btn next-btn" id="nextBtn">التالي</button><button type="submit" class="nav-btn submit-btn" id="submitBtn" style="display:none">حفظ البيانات</button></div>
+            <div id="message"></div>
+        </form>
+    </div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function( ) {
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz_BQ6WqMjzc_ORTmFITWYGPjXhoV0Z76VZe57Leg10vsLbaoIhT6CgJA7X9W8-Or6sbA/exec";
+    const steps = Array.from(document.querySelectorAll(".form-step"));
+    const nextBtn = document.getElementById("nextBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    const submitBtn = document.getElementById("submitBtn");
+    const stepCounter = document.getElementById("step-counter");
+    const progressInner = document.getElementById("progress-inner");
+    const messageDiv = document.getElementById("message");
+    const form = document.getElementById("teacherForm");
+    let currentStep = 0;
+    const totalSteps = steps.length;
+
+    function updateFormUI() {
+        stepCounter.textContent = `الخطوة ${currentStep + 1} من ${totalSteps}`;
+        progressInner.style.width = `${(currentStep / (totalSteps - 1)) * 100}%`;
+        steps.forEach((step, index) => {
+            step.classList.toggle("active", index === currentStep);
+            step.classList.toggle("inactive", index !== currentStep);
+        });
+        prevBtn.style.display = currentStep > 0 ? "inline-block" : "none";
+        nextBtn.style.display = currentStep < totalSteps - 1 ? "inline-block" : "none";
+        submitBtn.style.display = currentStep === totalSteps - 1 ? "inline-block" : "none";
+    }
+
+    // --- الدالة المصححة ---
+    function validateStep() {
+        const currentStepFields = steps[currentStep].querySelectorAll("input[required], select[required]");
+        let allValid = true;
+        currentStepFields.forEach(field => {
+            if (field && !field.value.trim()) {
+                field.style.borderColor = "red";
+                if (allValid) { // عرض التنبيه مرة واحدة فقط
+                    alert("يرجى ملء الحقل المطلوب للمتابعة.");
+                    field.focus();
+                }
+                allValid = false;
+            } else if (field) {
+                field.style.borderColor = "#ced4da";
+            }
+        });
+        return allValid;
+    }
+
+    nextBtn.addEventListener("click", () => { if (validateStep()) { currentStep++; updateFormUI(); } });
+    prevBtn.addEventListener("click", () => { if (currentStep > 0) { currentStep--; updateFormUI(); } });
+
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        if (!validateStep()) return;
+        messageDiv.className = "message-sending";
+        messageDiv.textContent = "جاري حفظ البيانات...";
+        submitBtn.disabled = true;
+        prevBtn.style.display = "none";
+        fetch(SCRIPT_URL, { method: "POST", body: new FormData(form) })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === "success") {
+                    messageDiv.className = "message-success";
+                    messageDiv.textContent = "تم حفظ البيانات بنجاح!";
+                    form.reset();
+                    currentStep = 0;
+                    updateFormUI();
+                } else { throw new Error(data.message || "حدث خطأ من الخادم"); }
+            })
+            .catch(error => {
+                console.error("Submit Error:", error);
+                messageDiv.className = "message-error";
+                messageDiv.textContent = "فشل في إرسال البيانات.";
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                // لا تقم بتحديث الواجهة هنا للسماح للرسالة بالظهور
+            });
+    });
+    updateFormUI();
+});
+</script>
+</body>
+</html>
